@@ -66,7 +66,7 @@ const styles = {
     marginTop: 16
   },
   countrySelector: {
-    flex: 1,
+    flex: 2,
     backgroundColor: 'rgb(239,239,244)',
     alignItems: 'center',
     padding: 8
@@ -83,7 +83,7 @@ export default class LoginCard extends Component {
     super(props);
 
     this.state = {
-      isOpen: true
+      isOpen: false
     };
   }
 
@@ -92,33 +92,48 @@ export default class LoginCard extends Component {
   }
 
   render() {
+    const {
+      container,
+      textTapStyle,
+      loginButtonBar,
+      googleButton,
+      loginButtonText,
+      facebookButton,
+      separatorTextContainer,
+      separatorText,
+      phoneInputBar,
+      countrySelector,
+      phoneInput,
+      continueButton,
+      continueButtonText
+    } = styles;
     return (
-      <Card style={styles.container}>
+      <Card style={container}>
         <CountryCodeSelector
           isOpen={this.state.isOpen}
           closeSelector={this.toggleSelector.bind(this, false)}
         />
-        <Text style={styles.textTapStyle}>One tap login</Text>
-        <View style={styles.loginButtonBar}>
-          <TouchableOpacity style={styles.googleButton}>
-            <Text style={styles.loginButtonText}>Google</Text>
+        <Text style={textTapStyle}>One tap login</Text>
+        <View style={loginButtonBar}>
+          <TouchableOpacity style={googleButton}>
+            <Text style={loginButtonText}>Google</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.facebookButton}>
-            <Text style={styles.loginButtonText}>Facebook</Text>
+          <TouchableOpacity style={facebookButton}>
+            <Text style={loginButtonText}>Facebook</Text>
           </TouchableOpacity>
         </View>
-        <View style={styles.separatorTextContainer}>
-          <Text style={styles.separatorText}>or</Text>
+        <View style={separatorTextContainer}>
+          <Text style={separatorText}>or</Text>
         </View>
-        <View style={styles.phoneInputBar}>
-          <TouchableOpacity style={styles.countrySelector}>
-            <Text>+91</Text>
+        <View style={phoneInputBar}>
+          <TouchableOpacity style={countrySelector} onPress={this.toggleSelector.bind(this, true)}>
+            <Text>+91&#x25BC;</Text>
           </TouchableOpacity>
-          <TextInput style={styles.phoneInput} placeholder="Enter Mobile Number" />
+          <TextInput style={phoneInput} placeholder="Enter Mobile Number" keyboardType="numeric" />
         </View>
         <Separator />
-        <TouchableOpacity style={styles.continueButton}>
-          <Text style={styles.continueButtonText}>CONTINUE</Text>
+        <TouchableOpacity style={continueButton}>
+          <Text style={continueButtonText}>CONTINUE</Text>
         </TouchableOpacity>
       </Card>
     );

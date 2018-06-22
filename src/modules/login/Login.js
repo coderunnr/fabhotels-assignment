@@ -17,7 +17,8 @@ const styles = StyleSheet.create({
   },
   skipText: {
     color: 'gray',
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    fontSize: 12
   },
   skipButton: {
     marginTop: 32
