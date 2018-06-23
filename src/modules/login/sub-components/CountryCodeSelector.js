@@ -58,8 +58,16 @@ export default class CountryCodeSelector extends Component {
     super(props);
 
     this.state = {
-      countryList
+      countryList: []
     };
+  }
+
+  componentWillMount() {
+    this.getCountryList();
+  }
+
+  async getCountryList() {
+    this.setState({ countryList });
   }
 
   onSearch(value) {
@@ -111,7 +119,7 @@ export default class CountryCodeSelector extends Component {
             />
           </View>
           <Separator />
-          <FlatList keyboardShouldPersistTaps='always' style={styles.listStyle} data={this.state.countryList} renderItem={this.renderListItem.bind(this)} />
+          <FlatList enableEmptySections keyboardShouldPersistTaps='always' style={styles.listStyle} data={this.state.countryList} renderItem={this.renderListItem.bind(this)} />
         </Card>
       </Modal>
     );
