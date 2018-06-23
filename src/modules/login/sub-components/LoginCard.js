@@ -5,6 +5,8 @@ import Card from '../../../common/card-components/Card';
 import Separator from './../../../common/Separator';
 import CountryCodeSelector from './CountryCodeSelector';
 
+import { countryList } from './../../../constants';
+
 const styles = {
   container: {
     width: '90%',
@@ -84,12 +86,17 @@ export default class LoginCard extends Component {
     super(props);
 
     this.state = {
-      isOpen: false
+      isOpen: false,
+      selectedCountry: countryList[0] || {}
     };
   }
 
   toggleSelector(isOpen) {
     this.setState({ isOpen });
+  }
+
+  onCountrySelected(selectedCountry) {
+    this.setState({ selectedCountry });
   }
 
   render() {
@@ -113,6 +120,7 @@ export default class LoginCard extends Component {
         <CountryCodeSelector
           isOpen={this.state.isOpen}
           closeSelector={this.toggleSelector.bind(this, false)}
+          onCountrySelected={this.onCountrySelected.bind(this)}
         />
         <Text style={textTapStyle}>One tap login</Text>
         <View style={loginButtonBar}>
@@ -128,7 +136,7 @@ export default class LoginCard extends Component {
         </View>
         <View style={phoneInputBar}>
           <TouchableOpacity style={countrySelector} onPress={this.toggleSelector.bind(this, true)}>
-            <Text>+91&#x25BC;</Text>
+            <Text>+{this.state.selectedCountry.callingCode || '+91'}&#x25BC;</Text>
           </TouchableOpacity>
           <TextInput
             style={phoneInput}

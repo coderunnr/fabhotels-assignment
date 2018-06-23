@@ -47,6 +47,9 @@ const styles = {
     height: 18,
     width: 18,
     alignSelf: 'center'
+  },
+  listStyle: {
+    padding: 12
   }
 };
 
@@ -62,7 +65,7 @@ export default class CountryCodeSelector extends Component {
   onSearch(value) {
     this.setState({
       countryList: countryList.filter(country => {
-        return country.toLowerCase().includes(value.toLowerCase());
+        return country.name.common.toLowerCase().includes(value.toLowerCase());
       })
     });
   }
@@ -73,6 +76,7 @@ export default class CountryCodeSelector extends Component {
   }
 
   handleRowClick(item) {
+    this.props.onCountrySelected(item);
     this.closeSelector();
   }
 
@@ -80,8 +84,8 @@ export default class CountryCodeSelector extends Component {
     return (
       <TouchableOpacity onPress={this.handleRowClick.bind(this, item)}>
         <View style={styles.searchBarItem}>
-          <Image source={flagIcon} style={styles.flagIcon} />
-          <Text style={styles.listItemText}>{item}</Text>
+          <Image source={{ uri: item.flag}} style={styles.flagIcon} />
+          <Text style={styles.listItemText}>{item.name.common}</Text>
         </View>
       </TouchableOpacity>
     );
@@ -107,7 +111,7 @@ export default class CountryCodeSelector extends Component {
             />
           </View>
           <Separator />
-          <FlatList data={this.state.countryList} renderItem={this.renderListItem.bind(this)} />
+          <FlatList keyboardShouldPersistTaps='always' style={styles.listStyle} data={this.state.countryList} renderItem={this.renderListItem.bind(this)} />
         </Card>
       </Modal>
     );
