@@ -69,6 +69,7 @@ const styles = {
     flex: 2,
     backgroundColor: 'rgb(239,239,244)',
     alignItems: 'center',
+    justifyContent: 'center',
     padding: 8
   },
   phoneInput: {
@@ -129,7 +130,12 @@ export default class LoginCard extends Component {
           <TouchableOpacity style={countrySelector} onPress={this.toggleSelector.bind(this, true)}>
             <Text>+91&#x25BC;</Text>
           </TouchableOpacity>
-          <TextInput style={phoneInput} placeholder="Enter Mobile Number" keyboardType="numeric" />
+          <TextInput
+            style={phoneInput}
+            placeholder="Enter Mobile Number"
+            keyboardType="numeric"
+            underlineColorAndroid="transparent"
+          />
         </View>
         <Separator />
         <TouchableOpacity style={continueButton}>

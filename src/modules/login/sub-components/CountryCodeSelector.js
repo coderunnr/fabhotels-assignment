@@ -36,7 +36,8 @@ const styles = {
   },
   searchInputStyle: {
     fontSize: 18,
-    padding: 2
+    padding: 2,
+    width: '100%'
   },
   listItemText: {
     padding: 8,
@@ -102,6 +103,7 @@ export default class CountryCodeSelector extends Component {
               style={styles.searchInputStyle}
               placeholder="Search..."
               onChangeText={this.onSearch.bind(this)}
+              underlineColorAndroid="transparent"
             />
           </View>
           <Separator />
